@@ -18,64 +18,66 @@ export default async function AdminPage() {
 
   return (
     <div className="p-8">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
-        <p className="text-gray-500 mt-1">{users.length} registered user{users.length !== 1 ? 's' : ''}</p>
+      <div className="mb-10 animate-slide-up">
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+          User Management
+        </h1>
+        <p className="text-slate-400 mt-2">{users.length} registered user{users.length !== 1 ? 's' : ''}</p>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div className="glass rounded-2xl border border-slate-700/50 overflow-hidden hover-lift">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-gray-100 bg-gray-50">
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+            <tr className="border-b border-slate-700/30 bg-gradient-to-r from-slate-800/50 to-slate-900/50">
+              <th className="text-left px-6 py-4 text-xs font-semibold text-slate-300 uppercase tracking-wide">
                 User
               </th>
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+              <th className="text-left px-6 py-4 text-xs font-semibold text-slate-300 uppercase tracking-wide">
                 Role
               </th>
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+              <th className="text-left px-6 py-4 text-xs font-semibold text-slate-300 uppercase tracking-wide">
                 Projects
               </th>
-              <th className="text-left px-6 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+              <th className="text-left px-6 py-4 text-xs font-semibold text-slate-300 uppercase tracking-wide">
                 Tasks
               </th>
-              <th className="text-right px-6 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+              <th className="text-right px-6 py-4 text-xs font-semibold text-slate-300 uppercase tracking-wide">
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-50">
+          <tbody className="divide-y divide-slate-700/30">
             {users.map((user) => (
-              <tr key={user.id} className="hover:bg-gray-50/50 transition-colors">
+              <tr key={user.id} className="hover:bg-slate-700/20 transition-colors">
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 text-sm font-bold flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 text-slate-900 text-sm font-bold flex items-center justify-center shrink-0">
                       {user.name.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <p className="font-medium text-gray-900">
+                      <p className="font-medium text-slate-100">
                         {user.name}
                         {user.id === session.userId && (
-                          <span className="ml-2 text-xs text-blue-600 font-medium">(you)</span>
+                          <span className="ml-2 text-xs text-cyan-400 font-medium">(you)</span>
                         )}
                       </p>
-                      <p className="text-xs text-gray-500">{user.email}</p>
+                      <p className="text-xs text-slate-400">{user.email}</p>
                     </div>
                   </div>
                 </td>
                 <td className="px-6 py-4">
                   <span
-                    className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${
+                    className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${
                       user.role === 'ADMIN'
-                        ? 'bg-purple-50 text-purple-700 ring-purple-300'
-                        : 'bg-gray-100 text-gray-700 ring-gray-300'
+                        ? 'bg-purple-500/20 text-purple-300 ring-purple-500/30'
+                        : 'bg-slate-500/20 text-slate-300 ring-slate-500/30'
                     }`}
                   >
                     {user.role.charAt(0) + user.role.slice(1).toLowerCase()}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-gray-600">{user._count.ownedProjects}</td>
-                <td className="px-6 py-4 text-gray-600">{user._count.assignedTasks}</td>
+                <td className="px-6 py-4 text-slate-300 font-medium">{user._count.ownedProjects}</td>
+                <td className="px-6 py-4 text-slate-300 font-medium">{user._count.assignedTasks}</td>
                 <td className="px-6 py-4">
                   <AdminUserActions
                     userId={user.id}
